@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"log"
 	"maps"
+	"net/http"
 	"os"
+	"strings"
 )
 
 type schema struct {
@@ -50,12 +53,37 @@ func main() {
 
 func includeRefs(refs []ref, s schema) error {
 	for _, ref := range refs {
-		refBytes, err := os.ReadFile(ref.Ref)
-		if err != nil {
-			return err
+
+		var refBytes bytes.Buffer
+		if strings.HasPrefix(ref.Ref, "http") {
+			resp, err := http.Get(ref.Ref)
+			if err != nil {
+				return err
+			}
+			defer resp.Body.Close()
+			_, err = refBytes.ReadFrom(resp.Body)
+			if err != nil {
+				return err
+			}
+		} else {
+			f, err := os.Open(ref.Ref)
+			if err != nil {
+				return err
+			}
+			defer f.Close()
+			_, err = refBytes.ReadFrom(f)
+			if err != nil {
+				return err
+			}
 		}
+
+		// refBytes, err := os.ReadFile(ref.Ref)
+		// if err != nil {
+		// 	return err
+		// }
+
 		var temp schema
-		if err := json.Unmarshal(refBytes, &temp); err != nil {
+		if err := json.Unmarshal(refBytes.Bytes(), &temp); err != nil {
 			return err
 		}
 		if temp.AllOf != nil {

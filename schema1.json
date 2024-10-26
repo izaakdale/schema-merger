@@ -2,7 +2,7 @@
   "type": "object",
   "allOf": [
     { "$ref": "schema2.json" },
-    { "$ref": "schema4.json" }
+    { "$ref": "https://raw.githubusercontent.com/izaakdale/schema-merger/refs/heads/main/schema4.json" }
   ],
   "properties": {
     "version1": {
