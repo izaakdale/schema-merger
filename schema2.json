@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "allOf": [
+    { "$ref": "schema3.json" }
+  ],
+  "properties": {
+    "version2": {
+      "type": "string"
+    }
+  }
+}

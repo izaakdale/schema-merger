@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "allOf": null,
+  "properties": {
+    "version1": { "type": "string" },
+    "version2": { "type": "string" },
+    "version3": { "type": "number" },
+    "version4": { "type": "number" }
+  }
+}
