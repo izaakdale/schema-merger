@@ -53,15 +53,14 @@ func main() {
 
 func includeRefs(refs []ref, s schema) error {
 	for _, ref := range refs {
-
-		var refBytes bytes.Buffer
+		var refBuff bytes.Buffer
 		if strings.HasPrefix(ref.Ref, "http") {
 			resp, err := http.Get(ref.Ref)
 			if err != nil {
 				return err
 			}
 			defer resp.Body.Close()
-			_, err = refBytes.ReadFrom(resp.Body)
+			_, err = refBuff.ReadFrom(resp.Body)
 			if err != nil {
 				return err
 			}
@@ -71,19 +70,14 @@ func includeRefs(refs []ref, s schema) error {
 				return err
 			}
 			defer f.Close()
-			_, err = refBytes.ReadFrom(f)
+			_, err = refBuff.ReadFrom(f)
 			if err != nil {
 				return err
 			}
 		}
 
-		// refBytes, err := os.ReadFile(ref.Ref)
-		// if err != nil {
-		// 	return err
-		// }
-
 		var temp schema
-		if err := json.Unmarshal(refBytes.Bytes(), &temp); err != nil {
+		if err := json.Unmarshal(refBuff.Bytes(), &temp); err != nil {
 			return err
 		}
 		if temp.AllOf != nil {
