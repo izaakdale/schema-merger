@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json-schema.org/draft-07/schema",
   "type": "object",
   "allOf": [
     { "$ref": "schema2.json" },
@@ -8,5 +9,8 @@
     "version1": {
       "type": "string"
     }
-  }
+  },
+  "required": [
+    "version1"
+  ]
 }

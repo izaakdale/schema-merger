@@ -7,5 +7,8 @@
     "version2": {
       "type": "string"
     }
-  }
+  },
+  "required": [
+    "version2"
+  ]
 }

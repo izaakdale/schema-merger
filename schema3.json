@@ -4,5 +4,8 @@
     "version3": {
       "type": "number"
     }
-  }
+  },
+  "required": [
+    "version3"
+  ]
 }
