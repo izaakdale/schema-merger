@@ -1,1 +1,11 @@
-{"type":"object","$schema":"https://json-schema.org/draft-07/schema","properties":{"version1":{"type":"string"},"version2":{"type":"string"},"version3":{"type":"number"},"version4":{"type":"number"}},"required":["version1","version2","version3"]}
+{
+  "type": "object",
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "properties": {
+    "version1": { "type": "string" },
+    "version2": { "type": "string" },
+    "version3": { "type": "number" },
+    "version4": { "type": "number" }
+  },
+  "required": ["version1", "version2", "version3"]
+}
